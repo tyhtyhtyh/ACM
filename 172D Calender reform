@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#define ll long long 
+using namespace std;
+int num[10000005];
+int main()
+{
+	int a,b;
+	cin>>a>>b;
+	int end=a+b-1;
+	ll ans=0;
+	for(int i=a;i<=end;++i) num[i]=i;
+	for(int i=2;i*i<=end;++i)//其实是互不干扰的！因为每个因子都是平方！所以怎么除都没有关系！
+	{
+		ll p=i*i;
+		int hh;
+		if(a%p==0) hh=a;
+	    else hh=((a+p)/p)*p;//找到比a大的可以整除p的数
+		for(int j=hh;j<=end;j+=p)
+		{
+			while(num[j]%p==0) num[j]/=p;
+		}
+	}
+	for(int i=a;i<=end;++i) ans+=num[i];
+	cout<<ans<<endl;
+	return 0;
+}
